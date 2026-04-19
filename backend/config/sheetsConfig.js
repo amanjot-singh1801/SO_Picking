@@ -4,10 +4,19 @@ const path = require('path');
 
 dotenv.config();
 
-const auth = new google.auth.GoogleAuth({
-  keyFile: path.resolve(process.env.SERVICE_ACCOUNT_PATH),
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+let auth;
+if (process.env.SERVICE_ACCOUNT_JSON) {
+  
+  const credentials = JSON.parse(process.env.SERVICE_ACCOUNT_JSON);
+  auth = new google.auth.GoogleAuth({
+    credentials,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+}
+// const auth = new google.auth.GoogleAuth({
+//   keyFile: path.resolve(process.env.SERVICE_ACCOUNT_PATH),
+//   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+// });
 
 const sheets = google.sheets({ version: 'v4', auth });
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
