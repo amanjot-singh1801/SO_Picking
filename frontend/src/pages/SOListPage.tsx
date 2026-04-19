@@ -25,7 +25,7 @@ export default function SOListPage() {
         placeholder="Search SO number"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-6 text-2xl border rounded-xl mb-10"
+        className="w-full p-4 text-2xl border rounded-xl mb-10"
       />
       <div className="space-y-4">
         {filtered.map((so) => (
@@ -38,7 +38,7 @@ export default function SOListPage() {
               <span className="font-mono">{so.SO}</span>{" "}
               <span className="text-gray-400 text-xl">• {so.Date}</span>
             </div>
-            <span className="px-8 py-2 bg-yellow-100 text-yellow-700 rounded-xl text-xl font-medium">
+            <span className="px-8 py-2 bg-yellow-100 text-yellow-700 rounded-xl text-sm font-medium">
               PENDING
             </span>
           </div>
