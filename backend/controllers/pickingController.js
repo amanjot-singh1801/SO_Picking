@@ -1,4 +1,4 @@
-const { sheetsService } = require('../config/sheets.config');
+const { sheetsService } = require('../config/sheetsConfig');
 
 const pickingController = {
   async getPendingSOs(req, res) {

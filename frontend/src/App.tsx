@@ -1,11 +1,17 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SOListPage from "./pages/SOListPage";
+import SODetailsPage from "./pages/SODetailsPage";
+import PickingPage from "./pages/PickingPages";
+
 function App() {
   return (
-    <div className="App">
-      <div className='bg-blue'>
-        <p className="text-red-500">Hello</p>
-      </div>
-
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SOListPage />} />
+        <Route path="/so/:so" element={<SODetailsPage />} />
+        <Route path="/picking/:so" element={<PickingPage />} />
+      </Routes>
+    </Router>
   );
 }
 
