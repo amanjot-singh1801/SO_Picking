@@ -87,20 +87,18 @@ const sheetsService = {
  
     const headers = rows[0]; // ['SKU', 'Name']
     return rows.slice(1)
-      .filter(r => r[0]) // skip empty rows
+      .filter(r => r[0]) 
       .map(row => {
         const obj = {};
         headers.forEach((h, i) => { obj[h] = row[i] || ''; });
         return obj;
       });
-    // Returns: [{ SKU: 'ABC123', Name: 'Widget Box' }, ...]
   },
 
   
   async appendErrors(errors) {
     if (!errors || errors.length === 0) return true;
 
-    // Idempotency check
     const existing = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range: 'Errors!A:F',

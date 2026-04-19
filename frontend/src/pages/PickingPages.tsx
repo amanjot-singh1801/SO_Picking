@@ -113,18 +113,11 @@ export default function PickingPage() {
   }, [so, navigate]);
 
   useEffect(() => {
-    api
-      .getSKUMaster()
-      .then((data) => {
-        const map: Record<string, string> = {};
-        data.forEach((row) => {
-          map[row.SKU] = row.Name;
-        });
-        setSkuMaster(map);
-      })
-      .catch(() => {
-        console.warn("SKU Master could not be loaded.");
-      });
+    api.getSKUMaster().then((data) => {
+      const map: Record<string, string> = {};
+      data.forEach((row:any) => { map[row.SKU] = row.Name; });
+      setSkuMaster(map);
+    }).catch(() => {console.warn("SKU Master could not be loaded.");});
   }, []);
 
   useBarcodeScanner((barcode: string) => {
@@ -150,8 +143,6 @@ export default function PickingPage() {
     setShowMismatch(false);
     setShowError(true);
   };
-
-  // Shared helper: advance to next location or mark all done
   const advanceLocation = () => {
     const isLastLocation = currentIndex + 1 >= details.length;
     if (!isLastLocation) {
@@ -187,8 +178,6 @@ export default function PickingPage() {
         createdAt: new Date(),
       });
       setShowError(false);
-      // After logging an error the picker must be able to continue.
-      // Advance to the next location so they are never stuck.
       advanceLocation();
     } catch (error) {
       console.log("Failed to save error locally. Please try again. : ", error);
@@ -207,8 +196,6 @@ export default function PickingPage() {
       reset();
       navigate("/");
     } catch {
-      // Do NOT call handleFinalSubmit() recursively — it grows the call stack
-      // on repeated failures. Instead expose a Retry button.
       setSubmitFailed(true);
     } finally {
       setSubmitLoading(false);

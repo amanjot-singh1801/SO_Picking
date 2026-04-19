@@ -22,14 +22,11 @@ export default function ErrorModal({ isOpen, onClose, onSubmit }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
-      {/* MODAL CONTAINER */}
       <div className="bg-white rounded-3xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
-        {/* HEADER */}
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold text-red-600">Report Error</h2>
         </div>
 
-        {/* SCROLLABLE CONTENT */}
         <div className="flex-1 overflow-y-auto p-6">
           <div className="grid grid-cols-1 gap-3 mb-6">
             {ERROR_TYPES.map((t) => (
@@ -56,7 +53,6 @@ export default function ErrorModal({ isOpen, onClose, onSubmit }: Props) {
           />
         </div>
 
-        {/* FIXED FOOTER */}
         <div className="p-6 border-t flex gap-4">
           <button
             onClick={onClose}
