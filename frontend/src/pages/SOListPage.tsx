@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../lib/api";
+import Spinner from "../components/Spinner";
 
 export default function SOListPage() {
   const [sos, setSos] = useState<any[]>([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.getPendingSOs().then(setSos);
-  }, []);
+    api.getPendingSOs()
+      .then((data) => setSos(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+    }, []);
 
   const filtered = sos.filter((so) =>
     so.SO.toLowerCase().includes(search.toLowerCase()),
   );
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
